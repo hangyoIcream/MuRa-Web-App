@@ -7,7 +7,7 @@ const state = {
     isDarkMode: false,
     searchQuery: '',
     currentPage: 1,
-    itemsPerPage: 1101,
+    itemsPerPage: 200,
     currentRoute: 'home' // 'home', 'favorites', 'detail'
 };
 
@@ -510,3 +510,4 @@ window.shareApp = (text) => {
     }
 
 };
+
