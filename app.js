@@ -14,7 +14,7 @@ const state = {
 // Define all available verse IDs to load
 // UPDATED: Now includes IDs 1 through 10
 //const ALL_VERSE_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]; 
-const ALL_VERSE_IDS = Array.from({ length: 1101 }, (_, i) => i + 1);
+const ALL_VERSE_IDS = Array.from({ length: 200 }, (_, i) => i + 1);
 
 /**
  * INITIALIZATION
@@ -508,4 +508,5 @@ window.shareApp = (text) => {
         // Fallback for browsers without Web Share API
         console.log(`Share: "${shareData.text}" at ${shareData.url}`);
     }
+
 };
