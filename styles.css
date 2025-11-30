@@ -8,6 +8,22 @@ body {
     @apply flex items-center gap-4 p-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors font-kannada font-medium text-gray-700 dark:text-gray-200;
 }
 
+/* Heart Pop Animation */
+@keyframes heartBurst {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.35); }
+    100% { transform: scale(1); }
+}
+
+.animate-pop {
+    animation: heartBurst 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Ensure the SVG handles color transitions smoothly */
+.lucide-heart {
+    transition: fill 0.3s ease, color 0.3s ease;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
