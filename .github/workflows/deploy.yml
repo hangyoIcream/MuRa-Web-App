@@ -3,12 +3,13 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main   # Trigger on pushes to main branch
+      - main  # Trigger on pushes to main branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    # Set permissions for GITHUB_TOKEN
     permissions:
       contents: read
       pages: write
@@ -16,15 +17,21 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
+        # Use the latest stable version of checkout
+        uses: actions/checkout@v4
 
       - name: Setup GitHub Pages
-        uses: actions/configure-pages@v3
+        # Use the latest stable version of configure-pages
+        # NOTE: The version is often @v4 now, but @v3 might still work, 
+        # using the newest recommended is best practice.
+        uses: actions/configure-pages@v4
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        # !!! CRITICAL FIX: Use the latest stable version of upload-pages-artifact !!!
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: .   # Your repo root containing index.html
+          path: .  # Your repo root containing index.html
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+        # !!! CRITICAL FIX: Use the latest stable version of deploy-pages !!!
+        uses: actions/deploy-pages@v4
