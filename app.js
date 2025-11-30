@@ -33,7 +33,7 @@ async function initData() {
     console.log("Starting data initialization and JSON fetching...");
     
     // 1. Load Favorites from localStorage
-    const savedFavs = localStorage.getItem('kagga_favs');
+    const savedFavs = localStorage.getItem('mudduRamanaManasu_favs');
     if (savedFavs) state.favorites = JSON.parse(savedFavs);
     
     // 2. Fetch all JSON files concurrently
@@ -101,7 +101,7 @@ async function initData() {
  * THEME HANDLING
  */
 function initTheme() {
-    const savedTheme = localStorage.getItem('kagga_theme');
+    const savedTheme = localStorage.getItem('mudduRamanaManasu_theme');
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
     if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
@@ -119,12 +119,12 @@ function setTheme(isDark) {
     
     if (isDark) {
         html.classList.add('dark');
-        localStorage.setItem('kagga_theme', 'dark');
+        localStorage.setItem('mudduRamanaManasu_theme', 'dark');
         if(icon) icon.setAttribute('data-lucide', 'sun');
         if(text) text.textContent = 'Light Mode';
     } else {
         html.classList.remove('dark');
-        localStorage.setItem('kagga_theme', 'light');
+        localStorage.setItem('mudduRamanaManasu_theme', 'light');
         if(icon) icon.setAttribute('data-lucide', 'moon');
         if(text) text.textContent = 'Dark Mode';
     }
@@ -282,7 +282,7 @@ function renderList(onlyFavorites) {
 function createVerseCard(verse) {
     const isFav = state.favorites.includes(verse.id);
     const card = document.createElement('div');
-    card.className = 'bg-white dark:bg-kagga-darkCard shadow-sm rounded-xl p-4 mb-3 flex items-start gap-4 cursor-pointer hover:shadow-md transition-all border border-gray-100 dark:border-gray-800 animate-fade-in';
+    card.className = 'bg-white dark:bg-mudduRamanaManasu-darkCard shadow-sm rounded-xl p-4 mb-3 flex items-start gap-4 cursor-pointer hover:shadow-md transition-all border border-gray-100 dark:border-gray-800 animate-fade-in';
     
     // Preview Text (4 lines)
     const textPreview = verse.lines.slice(0, 4).map(l => l.kannada_original).join('<br>');
@@ -292,47 +292,49 @@ function createVerseCard(verse) {
         <div class="flex-1">
             <p class="text-gray-800 dark:text-gray-200 font-kannada text-lg leading-relaxed">${textPreview}</p>
         </div>
-        <button class="fav-btn p-2 -mr-2 -mt-2 z-10" data-id="${verse.id}">
-            <i data-lucide="heart" class="w-5 h-5 transition-colors duration-300 ${isFav ? 'fill-kagga-orange text-kagga-orange' : 'text-gray-400'}"></i>
+        <button class="fav-btn p-2 -mr-2 -mt-2 z-10 transition-transform active:scale-95" data-id="${verse.id}">
+            <i data-lucide="heart" class="w-5 h-5 transition-colors duration-300 ${isFav ? 'fill-mudduRamanaManasu-orange text-mudduRamanaManasu-orange' : 'text-gray-400'}"></i>
         </button>
     `;
 
     // Click to Navigate
     card.onclick = (e) => {
-        // If clicked heart, don't navigate
         if(e.target.closest('.fav-btn')) return;
         window.location.hash = `#verse/${verse.id}`;
     };
 
-    // Favorite Click
+    // Favorite Click Logic
     const favBtn = card.querySelector('.fav-btn');
     favBtn.onclick = (e) => {
         e.stopPropagation();
         toggleFavorite(verse.id);
-        const icon = favBtn.querySelector('i');
+        
+        // FIX: Select the SVG (Lucide replaces the <i> tag), not the 'i'
+        const icon = favBtn.firstElementChild;
         const newStatus = state.favorites.includes(verse.id);
         
-        // Toggle icon visual
-        icon.classList.toggle('fill-kagga-orange', newStatus);
-        icon.classList.toggle('text-kagga-orange', newStatus);
-        icon.classList.toggle('text-gray-400', !newStatus);
+        if (icon) {
+            // 1. Handle Colors
+            if (newStatus) {
+                icon.classList.add('fill-mudduRamanaManasu-orange', 'text-mudduRamanaManasu-orange');
+                icon.classList.remove('text-gray-400');
+            } else {
+                icon.classList.remove('fill-mudduRamanaManasu-orange', 'text-mudduRamanaManasu-orange');
+                icon.classList.add('text-gray-400');
+            }
+
+            // 2. Handle Animation (Remove class -> void offset -> add class to restart animation)
+            icon.classList.remove('animate-pop');
+            void icon.offsetWidth; // Trigger reflow to restart animation
+            icon.classList.add('animate-pop');
+        }
         
-        // Add pop animation
-        icon.parentElement.classList.add('heart-pop');
-        setTimeout(() => icon.parentElement.classList.remove('heart-pop'), 300);
-        
-        // If on favorites page and unfavorited, remove card immediately
+        // Remove card if on Favorites page
         if(state.currentRoute === 'favorites' && !newStatus) {
-            // Remove with a quick fade out animation
             card.style.opacity = '0';
             card.style.transform = 'translateY(-10px)';
             setTimeout(() => card.remove(), 300);
-        }
-        
-        // Re-render favorites list if filtering is active and something changed
-        if(state.currentRoute === 'favorites') {
-             // A slight delay ensures the animation can start before the list re-renders if necessary
-             setTimeout(() => renderList(true), 350); 
+            setTimeout(() => renderList(true), 350); 
         }
     };
 
@@ -351,15 +353,15 @@ function renderDetail(id) {
     const isFav = state.favorites.includes(verse.id);
 
     container.innerHTML = `
-        <div class="bg-white dark:bg-kagga-darkCard rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800 overflow-hidden animate-fade-in">
+        <div class="bg-white dark:bg-mudduRamanaManasu-darkCard rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800 overflow-hidden animate-fade-in">
             <div class="bg-orange-50 dark:bg-gray-800/50 p-4 flex justify-between items-center border-b border-orange-100 dark:border-gray-700">
                 <div>
-                    <span class="text-xs font-bold text-kagga-orange uppercase tracking-wider">Verse ${verse.id}</span>
+                    <span class="text-xs font-bold text-mudduRamanaManasu-orange uppercase tracking-wider">Verse ${verse.id}</span>
                     <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 font-kannada">${verse.chapter}</h2>
                 </div>
                 <div class="flex gap-2">
                      <button id="detail-fav-btn" class="p-2 rounded-full bg-white dark:bg-gray-700 shadow-sm">
-                        <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-kagga-orange text-kagga-orange' : 'text-gray-400'}"></i>
+                        <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-mudduRamanaManasu-orange text-mudduRamanaManasu-orange' : 'text-gray-400'}"></i>
                      </button>
                      <button id="detail-share-btn" class="p-2 rounded-full bg-white dark:bg-gray-700 shadow-sm">
                         <i data-lucide="share-2" class="w-5 h-5 text-gray-600 dark:text-gray-300"></i>
@@ -393,15 +395,35 @@ function renderDetail(id) {
     `;
 
     // Handle Detail Fav Click
+    // ... inside renderDetail function ...
+
+    // Handle Detail Fav Click
     const detailFavBtn = document.getElementById('detail-fav-btn');
     detailFavBtn.onclick = () => {
         toggleFavorite(verse.id);
-        const icon = detailFavBtn.querySelector('i');
+        
+        // FIX: Target the SVG directly
+        const icon = detailFavBtn.firstElementChild;
         const newStatus = state.favorites.includes(verse.id);
-        icon.classList.toggle('fill-kagga-orange', newStatus);
-        icon.classList.toggle('text-kagga-orange', newStatus);
-        icon.classList.toggle('text-gray-400', !newStatus);
+        
+        if (icon) {
+             // 1. Handle Colors
+            if (newStatus) {
+                icon.classList.add('fill-mudduRamanaManasu-orange', 'text-mudduRamanaManasu-orange');
+                icon.classList.remove('text-gray-400');
+            } else {
+                icon.classList.remove('fill-mudduRamanaManasu-orange', 'text-mudduRamanaManasu-orange');
+                icon.classList.add('text-gray-400');
+            }
+
+            // 2. Trigger Pop Animation
+            icon.classList.remove('animate-pop');
+            void icon.offsetWidth; // Trigger reflow
+            icon.classList.add('animate-pop');
+        }
     };
+    
+// ... rest of function
 
     // Handle Share Button
     document.getElementById('detail-share-btn').onclick = () => {
@@ -423,7 +445,7 @@ function toggleFavorite(id) {
     } else {
         state.favorites.splice(index, 1);
     }
-    localStorage.setItem('kagga_favs', JSON.stringify(state.favorites));
+    localStorage.setItem('mudduRamanaManasu_favs', JSON.stringify(state.favorites));
 }
 
 function setupEventListeners() {
@@ -511,3 +533,132 @@ window.shareApp = (text) => {
 
 };
 
+/**
+ * MODAL & CONTACT LOGIC
+ */
+
+function openAboutModal() {
+    // Close drawer first if open
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    
+    // Logic to close drawer visually
+    drawer.classList.add('-translate-x-full');
+    overlay.classList.add('opacity-0');
+    setTimeout(() => overlay.classList.add('hidden'), 300);
+
+    // Open Modal
+    const modal = document.getElementById('about-modal');
+    const backdrop = document.getElementById('about-backdrop');
+    const panel = document.getElementById('about-panel');
+
+    modal.classList.remove('hidden');
+    
+    // Small delay to allow display:block to apply before animating opacity
+    setTimeout(() => {
+        backdrop.classList.remove('opacity-0');
+        panel.classList.remove('opacity-0', 'scale-95');
+        panel.classList.add('opacity-100', 'scale-100');
+    }, 10);
+}
+
+function closeAboutModal() {
+    const modal = document.getElementById('about-modal');
+    const backdrop = document.getElementById('about-backdrop');
+    const panel = document.getElementById('about-panel');
+
+    // Animate out
+    backdrop.classList.add('opacity-0');
+    panel.classList.remove('opacity-100', 'scale-100');
+    panel.classList.add('opacity-0', 'scale-95');
+
+    // Hide after animation finishes
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 300);
+}
+
+function openContact() {
+    const email = "mudduramanatest@gmail.com"; // Placeholder ID
+    const subject = "Feedback for Mudduramana Manasu App";
+    const body = "Namaskara, I would like to share the following feedback...";
+    
+    // Determine if mobile to attempt direct app launch, otherwise generic mailto
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    window.location.href = mailtoLink;
+}
+
+// Close modal if clicking outside the panel (on backdrop)
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('about-modal');
+    const backdrop = document.getElementById('about-backdrop');
+    if (!modal.classList.contains('hidden') && e.target === backdrop) {
+        closeAboutModal();
+    }
+});
+
+/**
+ * CONTACT MODAL LOGIC (New)
+ */
+
+function openContactModal() {
+    // Close drawer first if open
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    
+    // Logic to close drawer visually
+    drawer.classList.add('-translate-x-full');
+    overlay.classList.add('opacity-0');
+    setTimeout(() => overlay.classList.add('hidden'), 300);
+
+    // Open Modal
+    const modal = document.getElementById('contact-modal');
+    const backdrop = document.getElementById('contact-backdrop');
+    const panel = document.getElementById('contact-panel');
+
+    modal.classList.remove('hidden');
+    
+    // Small delay to allow display:block to apply before animating opacity
+    setTimeout(() => {
+        backdrop.classList.remove('opacity-0');
+        panel.classList.remove('opacity-0', 'scale-95');
+        panel.classList.add('opacity-100', 'scale-100');
+    }, 10);
+}
+
+function closeContactModal() {
+    const modal = document.getElementById('contact-modal');
+    const backdrop = document.getElementById('contact-backdrop');
+    const panel = document.getElementById('contact-panel');
+
+    // Animate out
+    backdrop.classList.add('opacity-0');
+    panel.classList.remove('opacity-100', 'scale-100');
+    panel.classList.add('opacity-0', 'scale-95');
+
+    // Hide after animation finishes
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 300);
+}
+
+// Update the global event listener to handle closing the contact modal on backdrop click
+document.addEventListener('click', (e) => {
+    const aboutModal = document.getElementById('about-modal');
+    const contactModal = document.getElementById('contact-modal');
+    
+    // Handle About Modal closing
+    if (aboutModal && !aboutModal.classList.contains('hidden') && e.target.id === 'about-backdrop') {
+        closeAboutModal();
+    }
+    
+    // Handle Contact Modal closing
+    if (contactModal && !contactModal.classList.contains('hidden') && e.target.id === 'contact-backdrop') {
+        closeContactModal();
+    }
+});
+
+// Since the new function openContactModal replaces openContact, you can remove or rename the old openContact function.
+// For safety, you might want to rename your old openContact to something else or just remove it if it's no longer used. 
+// If you remove it, make sure the old function name is not referenced elsewhere.
