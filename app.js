@@ -175,7 +175,7 @@ function handleRouting() {
     } else {
         // Home Page
         state.currentRoute = 'home';
-        title.textContent = 'Mudduramana Manasu';
+        title.textContent = 'ಮುದ್ದುರಾಮನ ಮನಸು';
         state.currentPage = 1; // Reset pagination
         renderList(false);
         backBtn.classList.add('hidden');
@@ -520,8 +520,8 @@ function setupEventListeners() {
 // Global Share function (Web Share API)
 window.shareApp = (text) => {
     const shareData = {
-        title: 'Mudduramana Manasu',
-        text: text || 'Read the wisdom of K. C. Shivappa in this Mudduramana Manasu App!',
+        title: 'ಮುದ್ದುರಾಮನ ಮನಸು',
+        text: text || 'Read the wisdom of K. C. Shivappa in this ಮುದ್ದುರಾಮನ ಮನಸು App!',
         url: window.location.href
     };
     if (navigator.share) {
@@ -580,7 +580,7 @@ function closeAboutModal() {
 
 function openContact() {
     const email = "mudduramanatest@gmail.com"; // Placeholder ID
-    const subject = "Feedback for Mudduramana Manasu App";
+    const subject = "Feedback for ಮುದ್ದುರಾಮನ ಮನಸು App";
     const body = "Namaskara, I would like to share the following feedback...";
     
     // Determine if mobile to attempt direct app launch, otherwise generic mailto
