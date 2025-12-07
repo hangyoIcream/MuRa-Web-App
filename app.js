@@ -7,7 +7,7 @@ const state = {
     isDarkMode: false,
     searchQuery: '',
     currentPage: 1,
-    itemsPerPage: 200,
+    itemsPerPage: 1000,
     currentRoute: 'home' // 'home', 'favorites', 'detail'
 };
 
@@ -662,4 +662,5 @@ document.addEventListener('click', (e) => {
 // Since the new function openContactModal replaces openContact, you can remove or rename the old openContact function.
 // For safety, you might want to rename your old openContact to something else or just remove it if it's no longer used. 
 // If you remove it, make sure the old function name is not referenced elsewhere.
+
 
