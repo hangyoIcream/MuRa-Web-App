@@ -1,265 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>ಮುದ್ದುರಾಮನ ಮನಸು</title>
-
-   <link rel="icon" type="image/png" href="icon.png">
-
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+Kannada:wght@400;500;700&display=swap"
-      rel="stylesheet">
-   <script src="https://cdn.tailwindcss.com"></script>
-   <script>
-      // Tailwind Configuration for Dark Mode, Custom Colors/Fonts, and Animations
-      tailwind.config = {
-         darkMode: 'class',
-         theme: {
-            extend: {
-               colors: {
-                  mudduRamanaManasu: {
-                     orange: '#FF7F3F',
-                     bg: '#F9FAFB',
-                     darkBg: '#121212',
-                     card: '#FFFFFF',
-                     darkCard: '#1E1E1E',
-                     text: '#1F2937',
-                     darkText: '#E5E7EB'
-                  }
-               },
-               fontFamily: {
-                  sans: ['Inter', 'sans-serif'],
-                  kannada: ['"Noto Sans Kannada"', 'sans-serif'],
-               },
-               // --- CUSTOM ANIMATIONS ADDED HERE ---
-               keyframes: {
-                  'fade-in': {
-                     '0%': { opacity: 0, transform: 'translateY(10px)' },
-                     '100%': { opacity: 1, transform: 'translateY(0)' },
-                  },
-                  'pop': {
-                     '0%': { transform: 'scale(1)' },
-                     '50%': { transform: 'scale(1.25)' },
-                     '100%': { transform: 'scale(1)' },
-                  },
-                  'slide-down': {
-                     '0%': { height: '0', opacity: '0' },
-                     '100%': { height: 'auto', opacity: '1' },
-                  }
-               },
-               animation: {
-                  'fade-in': 'fade-in 0.5s ease-out forwards',
-                  'pop': 'pop 0.3s ease-in-out',
-                  'slide-down': 'slide-down 0.3s ease-out',
-               }
-               // ------------------------------------
-            }
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ಮುದ್ದುರಾಮನ ಮನಸು</title>
+      <!-- Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+Kannada:wght@400;500;700&display=swap" rel="stylesheet">
+      <!-- Tailwind CSS (via CDN) -->
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script>
+         // Tailwind Configuration for Dark Mode and Custom Colors/Fonts
+         tailwind.config = {
+             darkMode: 'class',
+             theme: {
+                 extend: {
+                     colors: {
+                         mudduRamanaManasu: {
+                             orange: '#FF7F3F',
+                             bg: '#F9FAFB',
+                             darkBg: '#121212',
+                             card: '#FFFFFF',
+                             darkCard: '#1E1E1E',
+                             text: '#1F2937',
+                             darkText: '#E5E7EB'
+                         }
+                     },
+                     fontFamily: {
+                         sans: ['Inter', 'sans-serif'],
+                         kannada: ['"Noto Sans Kannada"', 'sans-serif'],
+                     }
+                 }
+             }
          }
-      }
-   </script>
-   <!-- Icons (Lucide) -->
-   <script src="https://unpkg.com/lucide@latest"></script>
-   <!-- Custom Stylesheet -->
-   <link rel="stylesheet" href="style.css">
-</head>
-
-<body
-   class="bg-mudduRamanaManasu-bg dark:bg-mudduRamanaManasu-darkBg text-mudduRamanaManasu-text dark:text-mudduRamanaManasu-darkText transition-colors duration-300 min-h-screen">
-   <!-- NAVIGATION DRAWER -->
-   <div id="drawer-overlay"
-      class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-40 hidden transition-opacity duration-300 opacity-0"></div>
-   <aside id="drawer"
-      class="fixed top-0 left-0 h-full w-[85%] max-w-[300px] bg-white dark:bg-mudduRamanaManasu-darkBg z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-out flex flex-col">
-      <div
-         class="relative h-40 bg-gradient-to-br from-mudduRamanaManasu-orange to-red-500 p-6 flex flex-col justify-end text-white">
-         <button id="close-drawer-btn"
-            class="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-md">
+      </script>
+      <!-- Icons (Lucide) -->
+      <script src="https://unpkg.com/lucide@latest"></script>
+      <!-- Custom Stylesheet -->
+      <link rel="stylesheet" href="style.css">
+   </head>
+   <body class="bg-mudduRamanaManasu-bg dark:bg-mudduRamanaManasu-darkBg text-mudduRamanaManasu-text dark:text-mudduRamanaManasu-darkText transition-colors duration-300 min-h-screen">
+      <!-- NAVIGATION DRAWER -->
+      <div id="drawer-overlay" class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-40 hidden transition-opacity duration-300 opacity-0"></div>
+      <aside id="drawer" class="fixed top-0 left-0 h-full w-[85%] max-w-[300px] bg-white dark:bg-mudduRamanaManasu-darkBg z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-out flex flex-col">
+         <div class="relative h-40 bg-gradient-to-br from-mudduRamanaManasu-orange to-red-500 p-6 flex flex-col justify-end text-white">
+            <button id="close-drawer-btn" class="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-md">
             <i data-lucide="x" class="w-5 h-5 text-white"></i>
-         </button>
-         <h2 class="text-3xl font-bold font-kannada tracking-wide">ಮುದ್ದುರಾಮನ<br>ಮನಸು</h2>
-         <p class="text-white/80 text-xs mt-1 font-sans">ಸರಳ ಪದ್ಯಗಳು, ಆಳವಾದ ಸತ್ಯಗಳು</p>
-      </div>
-      <div class="flex-1 overflow-y-auto py-4">
-         <div class="px-4 mb-2">
-            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 ml-3">ವಿವರಗಳು / Details</p>
-            <ul class="space-y-1">
-               <li>
-                  <button onclick="openAboutModal()"
-                     class="w-full flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-gray-800 rounded-xl transition-colors group text-left">
-                     <i data-lucide="info"
-                        class="w-5 h-5 text-gray-400 group-hover:text-mudduRamanaManasu-orange transition-colors"></i>
-                     <span class="font-medium">ಕುರಿತು (About)</span>
-                  </button>
-               </li>
-               <li>
-                  <button onclick="openContactModal()"
-                     class="w-full flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-gray-800 rounded-xl transition-colors group text-left">
-                     <i data-lucide="mail"
-                        class="w-5 h-5 text-gray-400 group-hover:text-mudduRamanaManasu-orange transition-colors"></i>
-                     <span class="font-medium">ಸಂಪರ್ಕಿಸಿ (Contact)</span>
-                  </button>
-               </li>
-               <li>
-                  <button onclick="shareApp()"
-                     class="w-full flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-gray-800 rounded-xl transition-colors group text-left">
-                     <i data-lucide="share-2"
-                        class="w-5 h-5 text-gray-400 group-hover:text-mudduRamanaManasu-orange transition-colors"></i>
-                     <span class="font-medium">ಹಂಚಿಕೊಳ್ಳಿ (Share)</span>
-                  </button>
-               </li>
-            </ul>
+            </button>
+            <h2 class="text-3xl font-bold font-kannada tracking-wide">ಮುದ್ದುರಾಮನ ಮನಸು</h2>
+            <p class="text-white/80 text-xs mt-1 font-sans">Simple Verses, Profound Truths.</p>
          </div>
-         <hr class="my-2 border-gray-100 dark:border-gray-800 mx-6">
-         <div class="px-4 mt-2">
-            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 ml-3">ಅಧಿಸೂಚನೆಗಳು / Settings</p>
-            <ul class="space-y-1">
-               <li id="theme-toggle">
-                  <div
-                     class="flex items-center justify-between px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl cursor-pointer">
-                     <div class="flex items-center gap-4">
-                        <i data-lucide="moon" id="theme-icon" class="w-5 h-5 text-gray-400"></i>
-                        <span class="font-medium" id="theme-text">Dark Mode</span>
+         <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-4 mb-2">
+               <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 ml-3">ವಿವರಗಳು / Details</p>
+               <ul class="space-y-1">
+    <li>
+        <button onclick="openAboutModal()" class="w-full flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-gray-800 rounded-xl transition-colors group text-left">
+            <i data-lucide="info" class="w-5 h-5 text-gray-400 group-hover:text-mudduRamanaManasu-orange transition-colors"></i> 
+            <span class="font-medium">ಕುರಿತು (About)</span>
+        </button>
+    </li>
+    <li>
+        <button onclick="openContactModal()" class="w-full flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-gray-800 rounded-xl transition-colors group text-left">
+            <i data-lucide="mail" class="w-5 h-5 text-gray-400 group-hover:text-mudduRamanaManasu-orange transition-colors"></i> 
+            <span class="font-medium">ಸಂಪರ್ಕಿಸಿ (Contact)</span>
+        </button>
+    </li>
+    <li>
+        <button onclick="shareApp()" class="w-full flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-gray-800 rounded-xl transition-colors group text-left">
+            <i data-lucide="share-2" class="w-5 h-5 text-gray-400 group-hover:text-mudduRamanaManasu-orange transition-colors"></i> 
+            <span class="font-medium">ಹಂಚಿಕೊಳ್ಳಿ (Share)</span>
+        </button>
+    </li>
+</ul>
+            </div>
+            <hr class="my-2 border-gray-100 dark:border-gray-800 mx-6">
+            <div class="px-4 mt-2">
+               <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 ml-3">ಅಧಿಸೂಚನೆಗಳು / Settings</p>
+               <ul class="space-y-1">
+                  <li id="theme-toggle">
+                     <div class="flex items-center justify-between px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl cursor-pointer">
+                        <div class="flex items-center gap-4">
+                           <i data-lucide="moon" id="theme-icon" class="w-5 h-5 text-gray-400"></i> 
+                           <span class="font-medium" id="theme-text">Dark Mode</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-gray-300"></i>
                      </div>
-                     <i data-lucide="chevron-right" class="w-4 h-4 text-gray-300"></i>
-                  </div>
-               </li>
-            </ul>
-         </div>
-      </div>
-      <div class="p-4 border-t border-gray-100 dark:border-gray-800 text-center">
-         <div class="p-4 border-t border-gray-100 dark:border-gray-800 text-center">
-            <p class="text-xl text-red-500 my-1">
-               ❤️
-            </p>
-            <p class="text-xs text-gray-400 font-kannada">ಕನ್ನಡಕ್ಕಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ</p>
-            <p class="text-xs text-gray-400 font-kannada">Designed for Kannada</p>
-
-
-         </div>
-         <p class="text-[10px] text-gray-300 mt-1">v1.0.0</p>
-      </div>
-   </aside>
-   <!-- APP BAR -->
-   <header id="main-header"
-      class="sticky top-0 z-30 bg-white/90 dark:bg-mudduRamanaManasu-darkCard/90 backdrop-blur-md shadow-sm border-b border-gray-100 dark:border-gray-800 h-16 px-4 flex items-center justify-between">
-      <div class="flex items-center gap-4">
-         <button id="menu-btn" class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"><i
-               data-lucide="menu"></i></button>
-         <button id="back-btn" class="hidden p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"><i
-               data-lucide="arrow-left"></i></button>
-         <h1 id="page-title" class="text-xl font-bold font-kannada text-mudduRamanaManasu-orange truncate">Mudduramana
-            Manasu</h1>
-      </div>
-      <div class="flex items-center gap-2">
-         <!-- Desktop Search -->
-         <div id="search-container" class="relative hidden sm:block">
-            <input type="text" id="search-input" placeholder="Search..."
-               class="bg-gray-100 dark:bg-gray-800 px-4 py-1.5 rounded-full text-sm w-40 focus:w-56 transition-all outline-none border border-transparent focus:border-mudduRamanaManasu-orange">
-         </div>
-         <!-- Mobile Search Icon -->
-         <button id="mobile-search-toggle" class="sm:hidden p-2"><i data-lucide="search" class="w-5 h-5"></i></button>
-         <button id="nav-fav-btn" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full relative">
-            <i data-lucide="heart" class="w-6 h-6"></i>
-         </button>
-      </div>
-   </header>
-   <!-- MOBILE SEARCH BAR (appears under top bar) -->
-   <div id="mobile-search-bar"
-      class="hidden bg-white dark:bg-mudduRamanaManasu-darkCard p-3 border-b dark:border-gray-800 animate-slide-down">
-      <input type="text" id="mobile-search-input" placeholder="Search Kannada, English, Number..."
-         class="w-full bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg outline-none">
-   </div>
-   <!-- MAIN CONTENT -->
-   <main id="app-container" class="max-w-3xl mx-auto p-4 pb-20">
-      <div class="text-center mt-20 p-4">
-         <i data-lucide="loader-2" class="w-8 h-8 mx-auto animate-spin text-mudduRamanaManasu-orange"></i>
-         <p class="mt-3 text-lg text-gray-500 dark:text-gray-400">Loading verses...</p>
-      </div>
-   </main>
-   <div id="contact-modal" class="fixed inset-0 z-[60] hidden" aria-labelledby="contact-modal-title" role="dialog"
-      aria-modal="true">
-      <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm transition-opacity opacity-0" id="contact-backdrop">
-      </div>
-      <div class="fixed inset-0 z-10 overflow-y-auto">
-         <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-            <div
-               class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-mudduRamanaManasu-darkCard text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md scale-95 opacity-0"
-               id="contact-panel">
-               <div class="bg-gradient-to-r from-mudduRamanaManasu-orange to-red-500 px-4 py-6 sm:px-6 text-center">
-                  <div
-                     class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-md mb-3">
-                     <i data-lucide="mail" class="h-8 w-8 text-white"></i>
-                  </div>
-                  <h3 class="text-xl font-bold leading-6 text-white font-kannada" id="contact-modal-title">ಸಂಪರ್ಕಿಸಿ
-                     (Contact)</h3>
-                  <p class="text-white/80 text-xs mt-1">Get in touch</p>
-               </div>
-               <div class="px-6 py-6 space-y-6">
-                  <h3
-                     class="text-base font-bold text-mudduRamanaManasu-orange uppercase border-b border-gray-100 dark:border-gray-800 pb-1">
-                     ಕನ್ನಡಕ್ಕಾಗಿ ಒಂದು ಪ್ರೀತಿಯ ಯೋಜನೆ
-                  </h3>
-
-                  <p class="font-kannada text-base leading-relaxed text-gray-800 dark:text-gray-200">
-                     ಈ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಕನ್ನಡದ ಮೇಲಿನ ಪ್ರೀತಿ ಮತ್ತು ಗೌರವದಿಂದ ಹಾಗೂ ಮುದ್ದುರಾಮನ ಮನಸು (MuRa) ಕೃತಿಯಂತಹ
-                     ರತ್ನಗಳನ್ನು ಡಿಜಿಟಲ್ ಯುಗದಲ್ಲಿ ಸುಲಭವಾಗಿ ತಲುಪಿಸುವ ಉದ್ದೇಶದಿಂದ ನಿರ್ಮಿಸಲಾಗಿದೆ. ಇದು ಸಮಾನ ಮನಸ್ಕ ವ್ಯಕ್ತಿಗಳ
-                     ತಂಡದಿಂದ ಇಂಟರ್ನೆಟ್‌ನ ಸಹಾಯದೊಂದಿಗೆ ಅಭಿವೃದ್ಧಿಗೊಂಡಿದೆ.
-                  </p>
-                  <h3
-                     class="text-base font-bold text-mudduRamanaManasu-orange uppercase border-b border-gray-100 dark:border-gray-800 pb-1">
-                     A Project of Love for Kannada
-                  </h3>
-                  <p class="text-gray-600 dark:text-gray-300 text-sm italic">
-                     This app was built solely out of love and respect for Kannada and to make literary gems like
-                     MuRa accessible to the public in this digital age. It was built and developed by a set of
-                     like-minded individuals with vast help from the internet.
-                  </p>
-
-                  <h3 class="text-base font-bold text-gray-500 uppercase mt-4">
-                     ಸಹಯೋಗಕ್ಕೆ ಆಹ್ವಾನ / Join Us
-                  </h3>
-                  <p class="font-kannada text-lg leading-relaxed text-gray-800 dark:text-gray-200">
-                     ನಿಮಗೆ ಈ ಉದ್ದೇಶದಲ್ಲಿ ಆಸಕ್ತಿ, ಸಂಪನ್ಮೂಲ, ಅಥವಾ ಒಲವಿದ್ದರೆ, ಅಥವಾ ನಿಮ್ಮ ಅನಿಸಿಕೆ, ಸಲಹೆಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಲು
-                     ಕೆಳಗಿನ ಬಟನ್ ಬಳಸಿ.
-                  </p>
-                  <p class="text-gray-600 dark:text-gray-300 text-sm italic">
-                     If you have the passion, resources, or interest to address this mission or just want to get in
-                     touch, please use the button below.
-                  </p>
-
-                  <a href="mailto:mudduramanatest@gmail.com?subject=Feedback for ಮುದ್ದುರಾಮನ ಮನಸು App&body=Namaskaara, I would like to share the following feedback..."
-                     id="contact-mail-link"
-                     class="w-full inline-flex justify-center items-center rounded-lg bg-mudduRamanaManasu-orange px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-red-600 transition-colors active:scale-95">
-                     <i data-lucide="send" class="w-5 h-5 mr-2"></i>
-                     Email the Team
-                  </a>
-               </div>
-               <div
-                  class="bg-gray-50 dark:bg-gray-800/30 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 border-t border-gray-100 dark:border-gray-800">
-                  <button type="button" onclick="closeContactModal()"
-                     class="inline-flex w-full justify-center rounded-lg bg-white dark:bg-gray-700 px-3 py-2 text-sm font-semibold text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 sm:mt-0 sm:w-auto transition-all active:scale-95">
-                     Close
-                  </button>
-               </div>
+                  </li>
+               </ul>
             </div>
          </div>
+         <div class="p-4 border-t border-gray-100 dark:border-gray-800 text-center">
+            <div class="p-4 border-t border-gray-100 dark:border-gray-800 text-center">
+                    <p class="text-xl text-red-500 my-1">
+        ❤️
+    </p>
+    <p class="text-xs text-gray-400 font-kannada">ಕನ್ನಡಕ್ಕಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ</p>
+    <p class="text-xs text-gray-400 font-kannada">Designed for Kannada</p>
+    
+    
+</div>
+            <p class="text-[10px] text-gray-300 mt-1">v1.0.0</p>
+         </div>
+      </aside>
+      <!-- APP BAR -->
+      <header id="main-header" class="sticky top-0 z-30 bg-white/90 dark:bg-mudduRamanaManasu-darkCard/90 backdrop-blur-md shadow-sm border-b border-gray-100 dark:border-gray-800 h-16 px-4 flex items-center justify-between">
+         <div class="flex items-center gap-4">
+            <button id="menu-btn" class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"><i data-lucide="menu"></i></button>
+            <button id="back-btn" class="hidden p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"><i data-lucide="arrow-left"></i></button>
+            <h1 id="page-title" class="text-xl font-bold font-kannada text-mudduRamanaManasu-orange truncate">ಮುದ್ದುರಾಮನ ಮನಸು</h1>
+         </div>
+         <div class="flex items-center gap-2">
+            <!-- Desktop Search -->
+            <div id="search-container" class="relative hidden sm:block">
+               <input type="text" id="search-input" placeholder="Search..." class="bg-gray-100 dark:bg-gray-800 px-4 py-1.5 rounded-full text-sm w-40 focus:w-56 transition-all outline-none border border-transparent focus:border-mudduRamanaManasu-orange">
+            </div>
+            <!-- Mobile Search Icon -->
+            <button id="mobile-search-toggle" class="sm:hidden p-2"><i data-lucide="search" class="w-5 h-5"></i></button>
+            <button id="nav-fav-btn" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full relative">
+            <i data-lucide="heart" class="w-6 h-6"></i>
+            </button>
+         </div>
+      </header>
+      <!-- MOBILE SEARCH BAR (appears under top bar) -->
+      <div id="mobile-search-bar" class="hidden bg-white dark:bg-mudduRamanaManasu-darkCard p-3 border-b dark:border-gray-800 animate-slide-down">
+         <input type="text" id="mobile-search-input" placeholder="Search Kannada, English, Number..." class="w-full bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg outline-none">
       </div>
-   </div>
-   <div id="about-modal" class="fixed inset-0 z-[60] hidden" aria-labelledby="modal-title" role="dialog"
-      aria-modal="true">
+      <!-- MAIN CONTENT -->
+      <main id="app-container" class="max-w-3xl mx-auto p-4 pb-20">
+         <div class="text-center mt-20 p-4">
+            <i data-lucide="loader-2" class="w-8 h-8 mx-auto animate-spin text-mudduRamanaManasu-orange"></i>
+            <p class="mt-3 text-lg text-gray-500 dark:text-gray-400">Loading verses...</p>
+         </div>
+      </main>
+      <div id="about-modal" class="fixed inset-0 z-[60] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
       <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm transition-opacity opacity-0" id="about-backdrop"></div>
       <div class="fixed inset-0 z-10 overflow-y-auto">
          <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-            <div
-               class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-mudduRamanaManasu-darkCard text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md scale-95 opacity-0"
-               id="about-panel">
+            <div class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-mudduRamanaManasu-darkCard text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md scale-95 opacity-0" id="about-panel">
                <div class="bg-gradient-to-r from-mudduRamanaManasu-orange to-red-500 px-4 py-6 sm:px-6 text-center">
-                  <div
-                     class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-md mb-3">
+                  <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-md mb-3">
                      <i data-lucide="book-open" class="h-8 w-8 text-white"></i>
                   </div>
                   <h3 class="text-xl font-bold leading-6 text-white font-kannada" id="modal-title">ಮುದ್ದುರಾಮನ ಮನಸು</h3>
@@ -273,32 +154,27 @@
                         </p>
                         <ul class="list-none space-y-2 font-kannada text-base text-gray-700 dark:text-gray-300 ml-2">
                            <li class="flex items-start gap-3">
-                              <i data-lucide="sparkles"
-                                 class="w-4 h-4 mt-1 text-mudduRamanaManasu-orange flex-shrink-0"></i>
+                              <i data-lucide="sparkles" class="w-4 h-4 mt-1 text-mudduRamanaManasu-orange flex-shrink-0"></i>
                               <span class="leading-relaxed">
-                                 ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗದ ತತ್ವಗಾಂಭೀರ್ಯತೆದಿಂದ ಸ್ಫೂರ್ತಿಯಾಗಿದ್ದರೂ, ಇಲ್ಲಿನ ಸಾಲುಗಳು ಅತ್ಯಂತ ಸರಳ,
-                                 ಸುಲಭವಾಗಿ ಮನದೊಳಗೆ ಇಳಿಯುವಂತಿವೆ.
+                              ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗದ ತತ್ವಗಾಂಭೀರ್ಯತೆದಿಂದ ಸ್ಫೂರ್ತಿಯಾಗಿದ್ದರೂ, ಇಲ್ಲಿನ ಸಾಲುಗಳು ಅತ್ಯಂತ ಸರಳ, ಸುಲಭವಾಗಿ ಮನದೊಳಗೆ ಇಳಿಯುವಂತಿವೆ.
                               </span>
                            </li>
                            <li class="flex items-start gap-3">
                               <i data-lucide="link" class="w-4 h-4 mt-1 text-blue-500 flex-shrink-0"></i>
                               <span class="leading-relaxed">
-                                 ಇದು ಕಗ್ಗದಂತಹ ಶಾಶ್ವತ ಕೃತಿಗಳಿಗೆ ಹಗುರವಾಗಿ ಪ್ರಾರಂಭಿಸಲು ಬಯಸುವವರಿಗೆ ಇರುವ ಆದರ್ಶ ಸೇತುವೆ.
+                              ಇದು ಕಗ್ಗದಂತಹ ಶಾಶ್ವತ ಕೃತಿಗಳಿಗೆ ಹಗುರವಾಗಿ ಪ್ರಾರಂಭಿಸಲು ಬಯಸುವವರಿಗೆ ಇರುವ ಆದರ್ಶ ಸೇತುವೆ.
                               </span>
                            </li>
                            <li class="flex items-start gap-3">
-                              <i data-lucide="hand-heart"
-                                 class="w-4 h-4 mt-1 text-green-600 dark:text-green-400 flex-shrink-0"></i>
+                              <i data-lucide="hand-heart" class="w-4 h-4 mt-1 text-green-600 dark:text-green-400 flex-shrink-0"></i>
                               <span class="leading-relaxed">
-                                 ಪ್ರತಿ ಸಾಲು ಕ್ಷಣಕಾಲ ನಿಲ್ಲಲು, ಉಸಿರೆಳೆಯಲು, ಮತ್ತು ಮನಸ್ಸನ್ನು ಶಾಂತವಾಗಿ ಸಾಗಿಸಲು ಆಹ್ವಾನ
-                                 ನೀಡುತ್ತದೆ.
+                              ಪ್ರತಿ ಸಾಲು ಕ್ಷಣಕಾಲ ನಿಲ್ಲಲು, ಉಸಿರೆಳೆಯಲು, ಮತ್ತು ಮನಸ್ಸನ್ನು ಶಾಂತವಾಗಿ ಸಾಗಿಸಲು ಆಹ್ವಾನ ನೀಡುತ್ತದೆ.
                               </span>
                            </li>
                            <li class="flex items-start gap-3">
                               <i data-lucide="monitor-dot" class="w-4 h-4 mt-1 text-gray-500 flex-shrink-0"></i>
                               <span class="leading-relaxed">
-                                 ಸ್ವಚ್ಛವಾದ ಪ್ರದರ್ಶನದಿಂದ, ಒಂದೊಂದು ಸುಂದರ ಸಾಲಿನ ಮೂಲಕ ನಮ್ಮ ಮನದ ಮಾತು ಕೇಳಿಸುವ ಪ್ರಯತ್ನ
-                                 ಮಾಡುತ್ತದೆ.
+                              ಸ್ವಚ್ಛವಾದ ಪ್ರದರ್ಶನದಿಂದ, ಒಂದೊಂದು ಸುಂದರ ಸಾಲಿನ ಮೂಲಕ ನಮ್ಮ ಮನದ ಮಾತು ಕೇಳಿಸುವ ಪ್ರಯತ್ನ ಮಾಡುತ್ತದೆ.
                               </span>
                            </li>
                         </ul>
@@ -310,63 +186,50 @@
                         </p>
                         <ul class="list-none space-y-2 font-sans text-sm italic text-gray-500 dark:text-gray-400 ml-2">
                            <li class="flex items-start gap-3">
-                              <i data-lucide="sparkles"
-                                 class="w-4 h-4 mt-1 text-mudduRamanaManasu-orange flex-shrink-0"></i>
+                              <i data-lucide="sparkles" class="w-4 h-4 mt-1 text-mudduRamanaManasu-orange flex-shrink-0"></i>
                               <span class="leading-relaxed">
-                                 Though inspired by the philosophical depth of Mankuthimmana Kagga, the verses here are
-                                 extremely simple and easy to internalize.
+                              Though inspired by the philosophical depth of Mankuthimmana Kagga, the verses here are extremely simple and easy to internalize.
                               </span>
                            </li>
                            <li class="flex items-start gap-3">
                               <i data-lucide="link" class="w-4 h-4 mt-1 text-blue-500 flex-shrink-0"></i>
                               <span class="leading-relaxed">
-                                 It acts as an ideal bridge for those who wish to explore profound classical works but
-                                 prefer a lighter start.
+                              It acts as an ideal bridge for those who wish to explore profound classical works but prefer a lighter start.
                               </span>
                            </li>
                            <li class="flex items-start gap-3">
-                              <i data-lucide="hand-heart"
-                                 class="w-4 h-4 mt-1 text-green-600 dark:text-green-400 flex-shrink-0"></i>
+                              <i data-lucide="hand-heart" class="w-4 h-4 mt-1 text-green-600 dark:text-green-400 flex-shrink-0"></i>
                               <span class="leading-relaxed">
-                                 Each verse invites you to pause, breathe, and walk the world with a calmer mind.
+                              Each verse invites you to pause, breathe, and walk the world with a calmer mind.
                               </span>
                            </li>
                            <li class="flex items-start gap-3">
                               <i data-lucide="monitor-dot" class="w-4 h-4 mt-1 text-gray-500 flex-shrink-0"></i>
                               <span class="leading-relaxed">
-                                 Through its clean presentation, it seeks to let you hear your own heart, one beautiful
-                                 line at a time.
+                              Through its clean presentation, it seeks to let you hear your own heart, one beautiful line at a time.
                               </span>
                            </li>
                         </ul>
                      </div>
                      <hr class="border-gray-100 dark:border-gray-800">
                      <div>
-                        <h4
-                           class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1 flex items-center gap-2">
+                        <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1 flex items-center gap-2">
                            <i data-lucide="user-circle" class="w-5 h-5 text-gray-500"></i>
                            About the Author
                         </h4>
                         <div class="space-y-4">
                            <p class="font-kannada text-base leading-relaxed text-gray-800 dark:text-gray-200">
-                              ಕವಿ ಮತ್ತು ಲೇಖಕರಾದ ಕೆ. ಸಿ. ಶಿವಪ್ಪ ಅವರು "ಮುದ್ದುರಾಮನ ಮನಸು" ಕೃತಿಯ ಮೂಲಕ ತಮ್ಮ ಜೀವಂತ ಅನುಭವಗಳ
-                              ಸಾರವನ್ನು ಕನ್ನಡಕ್ಕೆ ನೀಡಿದ್ದಾರೆ. ಅವರ ಸಾಹಿತ್ಯವು ಸರಳವಾದ ಭಾಷೆಯಲ್ಲಿ ಆಳವಾದ ತಾತ್ವಿಕ ಸತ್ಯಗಳನ್ನು
-                              ತಲುಪಿಸುತ್ತದೆ.
+                              ಕವಿ ಮತ್ತು ಲೇಖಕರಾದ ಕೆ. ಸಿ. ಶಿವಪ್ಪ ಅವರು "ಮುದ್ದುರಾಮನ ಮನಸು" ಕೃತಿಯ ಮೂಲಕ ತಮ್ಮ ಜೀವಂತ ಅನುಭವಗಳ ಸಾರವನ್ನು ಕನ್ನಡಕ್ಕೆ ನೀಡಿದ್ದಾರೆ. ಅವರ ಸಾಹಿತ್ಯವು ಸರಳವಾದ ಭಾಷೆಯಲ್ಲಿ ಆಳವಾದ ತಾತ್ವಿಕ ಸತ್ಯಗಳನ್ನು ತಲುಪಿಸುತ್ತದೆ.
                            </p>
                            <p class="font-sans text-sm italic text-gray-500 dark:text-gray-400">
-                              K. C. Shivappa, a distinguished Kannada poet and writer, has poured the essence of his
-                              lifetime experiences into "ಮುದ್ದುರಾಮನ ಮನಸು." His literature stands out for its unique
-                              ability to convey profound philosophical truths through remarkably simple and accessible
-                              language.
+                              K. C. Shivappa, a distinguished Kannada poet and writer, has poured the essence of his lifetime experiences into "ಮುದ್ದುರಾಮನ ಮನಸು." His literature stands out for its unique ability to convey profound philosophical truths through remarkably simple and accessible language.
                            </p>
                         </div>
                      </div>
                   </div>
-                  <div
-                     class="bg-gray-50 dark:bg-gray-800/30 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 border-t border-gray-100 dark:border-gray-800">
-                     <button type="button" onclick="closeAboutModal()"
-                        class="inline-flex w-full justify-center rounded-lg bg-white dark:bg-gray-700 px-3 py-2 text-sm font-semibold text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 sm:mt-0 sm:w-auto transition-all active:scale-95">
-                        Close
+                  <div class="bg-gray-50 dark:bg-gray-800/30 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 border-t border-gray-100 dark:border-gray-800">
+                     <button type="button" onclick="closeAboutModal()" class="inline-flex w-full justify-center rounded-lg bg-white dark:bg-gray-700 px-3 py-2 text-sm font-semibold text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 sm:mt-0 sm:w-auto transition-all active:scale-95">
+                     Close
                      </button>
                   </div>
                </div>
@@ -375,6 +238,5 @@
       </div>
       <!-- Load Logic (This will fetch the data files) -->
       <script src="app.js"></script>
-</body>
-
+   </body>
 </html>
